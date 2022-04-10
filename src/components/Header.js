@@ -1,7 +1,29 @@
 import { ArrowLeft, ArrowRight, Search, LogoFull } from "../services/svg.service";
 
+import React, { useEffect } from "react";
 
 export default function Header() {
+
+  useEffect(() => {
+    const header = document.querySelector('.main-header');
+    const nav = document.querySelector('.main-header-nav');
+
+    const headerObserver = new IntersectionObserver(onHeaderObserved, {
+      rootMargin: "-91px 0px 0px",
+    });
+    
+    headerObserver.observe(header);
+    
+    function onHeaderObserved(entries) {
+      entries.forEach((entry) => {
+    
+        console.log('helllooo')
+        nav.style.position = entry.isIntersecting ? 'static' : 'fixed';
+      });
+    }
+  }, []); // <-- empty array means 'run once'
+
+
 
   return (
 
